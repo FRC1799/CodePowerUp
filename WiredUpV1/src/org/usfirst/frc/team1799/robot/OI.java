@@ -60,6 +60,7 @@ public class OI {
 		// Put Some buttons on the SmartDashboard
 		SmartDashboard.putData("Drive Forward", new AutoDriveForward());
 		SmartDashboard.putData("Drive Platform", new AutoDriveBack());
+		
 
 //		// Create some buttons
 //		JoystickButton dpadUp = new JoystickButton(m_stick, 5);
@@ -68,9 +69,12 @@ public class OI {
 //		JoystickButton dpadLeft = new JoystickButton(m_stick, 8);
 
 		// toggle compressor on/off - for testing and demo mostly
+		// TODO: try different button number
 		JoystickButton dcompressor = new JoystickButton(m_stick, 7);
-
 		dcompressor.whenPressed(new CompressorToggle());
+
+		//TODO: un-comment  below line and see if you this in SmartDashboard.
+		//SmartDashboard.putData("Compressor Toggle", new CompressorToggle());
 //
 //		// Connect the buttons to commands
 //		dpadUp.whenPressed(new AutoDriveForward());

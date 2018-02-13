@@ -3,15 +3,17 @@ package org.usfirst.frc.team1799.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1799.robot.RobotMap;
-
+import edu.wpi.first.wpilibj.Compressor;
 /**
  *
  */
-public class Compressor extends Subsystem {
+public class CompressorSubsystem extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	edu.wpi.first.wpilibj.Compressor compressor = new edu.wpi.first.wpilibj.Compressor(RobotMap.CAN.pcmId);
+	Compressor compressor = new Compressor(RobotMap.CAN.pcmId);
+	// TODO: try below
+	//Compressor compressor = new Compressor();
 
 
 	public void start() {

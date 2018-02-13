@@ -27,11 +27,6 @@ public class RobotMap {
 	public static final int kGyroChannel = 0;
 	
 	public static class CAN {
-		public static final int canid0 = 0;
-		public static final int canid1 = 1;
-		public static final int canid2 = 2;
-		public static final int canid3 = 3;
-		
-		public static final int pcmId = canid0;
+		public static final int pcmId = 0;
 	}
 }
