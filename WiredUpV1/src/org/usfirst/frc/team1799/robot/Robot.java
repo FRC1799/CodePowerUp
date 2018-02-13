@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1799.robot.commands.AutoDriveForward;
 import org.usfirst.frc.team1799.robot.commands.AutoDriveTurnLeft;
 import org.usfirst.frc.team1799.robot.subsystems.MecanumDriveTrain;
+import org.usfirst.frc.team1799.robot.subsystems.Compressor;
 import org.usfirst.frc.team1799.robot.Robot;
 
 /**
@@ -33,6 +34,8 @@ public class Robot extends TimedRobot {
 
 	// Initialize the our WireUpV1 subsystems
 	public static final MecanumDriveTrain kDrivetrain = new MecanumDriveTrain();
+
+	public static final Compressor kcompressor = new Compressor();
 	
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -50,6 +53,9 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Auto mode", m_chooser);
 		// SmartDashboard Buttons for robot subsystems initialized above
 		SmartDashboard.putData("Mecanum DriveTrain", kDrivetrain);
+
+		// start the compressor
+		kcompressor.start();
 	}
 
 	/**

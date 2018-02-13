@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import org.usfirst.frc.team1799.robot.commands.DriveWithJoystick;
+import org.usfirst.frc.team1799.robot.RobotMap;
 
 
 /**
@@ -20,7 +21,7 @@ public class MecanumDriveTrain extends Subsystem {
 	private static final int kFrontRightChannel = 2;
 	private static final int kRearRightChannel = 3;
 
-	private AnalogGyro m_gyro = new AnalogGyro(2);
+	private AnalogGyro m_gyro = new AnalogGyro(RobotMap.kGyroChannel);
 	private MecanumDrive m_robotDrive;
 
 	public MecanumDriveTrain() {

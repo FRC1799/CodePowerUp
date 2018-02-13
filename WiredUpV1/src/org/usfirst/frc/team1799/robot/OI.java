@@ -9,10 +9,13 @@ package org.usfirst.frc.team1799.robot;
 
 import org.usfirst.frc.team1799.robot.commands.AutoDriveForward;
 import org.usfirst.frc.team1799.robot.commands.AutoDriveBack;
+import org.usfirst.frc.team1799.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 //import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team1799.robot.commands.CompressorToggle;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -28,8 +31,8 @@ public class OI {
 	//// joystick.
 	// You create one by telling it which joystick it's on and which button
 	// number it is.
-	private static final int kJoystickChannel = 0;
-	Joystick m_stick = new Joystick(kJoystickChannel);
+
+	Joystick m_stick = new Joystick( RobotMap.kJoystickChannel );
 
 	// Button button = new JoystickButton(stick, buttonNumber);
 
@@ -44,7 +47,7 @@ public class OI {
 	// Start the command when the button is pressed and let it run the command
 	// until it is finished as determined by it's isFinished method.
 	// button.whenPressed(new ExampleCommand());
-
+	
 	// Run the command while the button is being held down and interrupt it once
 	// the button is released.
 	// button.whileHeld(new ExampleCommand());
@@ -63,6 +66,11 @@ public class OI {
 //		JoystickButton dpadRight = new JoystickButton(m_stick, 6);
 //		JoystickButton dpadDown = new JoystickButton(m_stick, 7);
 //		JoystickButton dpadLeft = new JoystickButton(m_stick, 8);
+
+		// toggle compressor on/off - for testing and demo mostly
+		JoystickButton dcompressor = new JoystickButton(m_stick, 7);
+
+		dcompressor.whenPressed(new CompressorToggle());
 //
 //		// Connect the buttons to commands
 //		dpadUp.whenPressed(new AutoDriveForward());
