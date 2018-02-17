@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1799.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -17,6 +18,10 @@ public class GrabberSystem extends Subsystem {
 	DoubleSolenoid RgrabberSolenoid = new DoubleSolenoid(RobotMap.CAN.pcmId, RobotMap.Solenoid.RightGrabberOpen, RobotMap.Solenoid.RightGrabberClose);
 	DoubleSolenoid LgrabberSolenoid = new DoubleSolenoid(RobotMap.CAN.pcmId, RobotMap.Solenoid.leftGrabberOpen, RobotMap.Solenoid.leftGrabberClose);
 	
+	public GrabberSystem() {
+		addChild("Right DSolenoid", (DoubleSolenoid) RgrabberSolenoid);
+		addChild("Left DSolenoid", (DoubleSolenoid) LgrabberSolenoid);
+	}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

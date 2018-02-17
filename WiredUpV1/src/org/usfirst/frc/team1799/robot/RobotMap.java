@@ -26,6 +26,13 @@ public class RobotMap {
 	public static final int kJoystickChannel = 0;
 	public static final int kGyroChannel = 0;
 	public static final double kShooterPunchTime = 0.3; //seconds
+
+	//Arm system
+	public static final double kArmspeed = 0.9; // 0 to 1:max
+	public static final double kArmSpeedUp = kArmspeed; 
+	public static final double kArmSpeedDown = kArmspeed; 
+	public static final boolean rightmotorInverted = false;
+	public static final boolean leftmotorInverted = false;
 	
 	public static class CAN {
 		public static final int pcmId = 0;

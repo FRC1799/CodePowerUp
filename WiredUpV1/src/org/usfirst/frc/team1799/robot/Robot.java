@@ -17,6 +17,7 @@ import org.usfirst.frc.team1799.robot.commands.AutoDriveForward;
 import org.usfirst.frc.team1799.robot.commands.AutoDriveTurnLeft;
 import org.usfirst.frc.team1799.robot.subsystems.MecanumDriveTrain;
 import org.usfirst.frc.team1799.robot.subsystems.ShooterSystem;
+import org.usfirst.frc.team1799.robot.subsystems.ArmPWMsystem;
 import org.usfirst.frc.team1799.robot.subsystems.CompressorSubsystem;
 import org.usfirst.frc.team1799.robot.subsystems.GrabberSystem;
 import org.usfirst.frc.team1799.robot.Robot;
@@ -39,6 +40,7 @@ public class Robot extends TimedRobot {
 	public static final CompressorSubsystem kcompressor = new CompressorSubsystem();
 	public static final ShooterSystem kShooterSystem = new ShooterSystem();
 	public static final GrabberSystem kGrabberSystem = new GrabberSystem();
+	public static final ArmPWMsystem kArm = new ArmPWMsystem();
 	
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -63,6 +65,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Compressor Subsystem", kcompressor);
 		SmartDashboard.putData("Shooter System", kShooterSystem);
 		SmartDashboard.putData("Grabber System", kGrabberSystem);
+		SmartDashboard.putData("Arm PWM System", kArm);
 	}
 
 	/**
@@ -142,14 +145,21 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+	}
+	/**
+	 * This function is called periodically for all modes.
+	 */
+	@Override
+	  public void robotPeriodic() {
 		SmartDashboard.putData(Scheduler.getInstance());
 		kcompressor.sendInfo();
 		kShooterSystem.sendInfo();
 		kDrivetrain.sendInfo();
 		kGrabberSystem.sendInfo();
+		kArm.sendInfo();
 		Scheduler.getInstance().run();
 		log();
-	}
+	  }
 	
 	/**
 	 * Log interesting values to the SmartDashboard.

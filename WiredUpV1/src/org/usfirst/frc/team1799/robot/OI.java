@@ -8,6 +8,9 @@
 package org.usfirst.frc.team1799.robot;
 
 import org.usfirst.frc.team1799.robot.commands.AutoDriveForward;
+import org.usfirst.frc.team1799.robot.commands.ArmMoveDown;
+import org.usfirst.frc.team1799.robot.commands.ArmMoveUp;
+import org.usfirst.frc.team1799.robot.commands.ArmStop;
 import org.usfirst.frc.team1799.robot.commands.AutoDriveBack;
 import org.usfirst.frc.team1799.robot.RobotMap;
 import org.usfirst.frc.team1799.robot.OI.motor_location;
@@ -119,8 +122,13 @@ public class OI {
 		new DoubleButton(m_stick, 1, 3).whenActive(new grabberToggle());
 		new DoubleButton(m_stick, 2, 4).whenActive(new grabberToggle());
 		
-		
-
+		//Arm motors
+		JoystickButton dArmUp = new JoystickButton(m_stick, 9);
+		dArmUp.whenPressed(new ArmMoveUp());
+		dArmUp.whenReleased(new ArmStop());
+		JoystickButton dArmDown = new JoystickButton(m_stick, 10);
+		dArmDown.whenPressed(new ArmMoveDown());
+		dArmDown.whenReleased(new ArmStop());
 //
 //		// Connect the buttons to commands
 //		dpadUp.whenPressed(new AutoDriveForward());
