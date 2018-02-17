@@ -25,8 +25,42 @@ public class RobotMap {
 	// public static int rangefinderModule = 1;
 	public static final int kJoystickChannel = 0;
 	public static final int kGyroChannel = 0;
+	public static final double kShooterPunchTime = 0.3; //seconds
 	
 	public static class CAN {
 		public static final int pcmId = 0;
 	}
+	
+	public static class Solenoid {
+		public static final int  channel0 = 0;
+		public static final int  channel1 = 1;
+		public static final int  channel2 = 2;
+		public static final int  channel3 = 3;
+		public static final int  channel4 = 4;
+		public static final int  channel5 = 5;
+		public static final int  channel6 = 6;
+		public static final int  channel7 = 7;
+		
+
+		public static final int  shooter = channel0;
+		public static final int  leftGrabberOpen = channel2;
+		public static final int  leftGrabberClose = channel3;
+		public static final int  RightGrabberOpen = channel4;
+		public static final int  RightGrabberClose = channel6;
+	}
+	
+	public static class PWM {
+		public static final int pwm0 = 0;
+		public static final int pwm1 = 1;
+		public static final int pwm2 = 2;
+		public static final int pwm3 = 3;
+		public static final int pwm4 = 4;
+		public static final int pwm5 = 5;
+		public static final int pwm6 = 6;
+		public static final int pwm7 = 7;
+		public static final int pwm8 = 8;
+		public static final int pwm9 = 9;
+	}
+	
+	
 }

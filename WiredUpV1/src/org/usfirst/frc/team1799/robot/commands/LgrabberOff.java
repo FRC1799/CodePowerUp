@@ -7,12 +7,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class CompressorToggle extends Command {
+public class LgrabberOff extends Command {
 
-    public CompressorToggle() {
+    public LgrabberOff() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(Robot.kcompressor);
+        requires(Robot.kGrabberSystem);
     }
 
     // Called just before this Command runs the first time
@@ -22,15 +22,12 @@ public class CompressorToggle extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-		Robot.kcompressor.toggleRun();
-//		System.out.println(this.getClass().getName() + " execute");
+    	Robot.kGrabberSystem.Loff();
     }
-    
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return true;
-        // TODO: try False
     }
 
     // Called once after isFinished returns true
@@ -41,6 +38,6 @@ public class CompressorToggle extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-		System.out.println(this.getClass().getName() + " interrupted");
+		System.out.println(this.getClass().getName() + " initalize");
     }
 }

@@ -4,9 +4,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import org.usfirst.frc.team1799.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team1799.robot.RobotMap;
+import org.usfirst.frc.team1799.robot.drive.PlayMecanum;
 
 
 /**
@@ -40,7 +42,8 @@ public class MecanumDriveTrain extends Subsystem {
 //		frontLeft.setInverted(true);
 //		rearLeft.setInverted(true);
 
-		m_robotDrive = new MecanumDrive(m_frontLeft, m_rearLeft, m_frontRight, m_rearRight);		
+		//m_robotDrive = new MecanumDrive(m_frontLeft, m_rearLeft, m_frontRight, m_rearRight);
+		m_robotDrive = new PlayMecanum(m_frontLeft, m_rearLeft, m_frontRight, m_rearRight);
 		addChild("Macanum drive", m_robotDrive);
 		// Configure gyro
         m_gyro.setSensitivity(0.007); // TODO: Handle more gracefully?
@@ -111,6 +114,11 @@ public class MecanumDriveTrain extends Subsystem {
 	 */
 	public double getAngle() {
 		return m_gyro.getAngle();
+	}
+
+
+	public void sendInfo() {
+		SmartDashboard.putData(this);
 	}
 	
 }

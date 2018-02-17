@@ -10,12 +10,24 @@ package org.usfirst.frc.team1799.robot;
 import org.usfirst.frc.team1799.robot.commands.AutoDriveForward;
 import org.usfirst.frc.team1799.robot.commands.AutoDriveBack;
 import org.usfirst.frc.team1799.robot.RobotMap;
+import org.usfirst.frc.team1799.robot.OI.motor_location;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 //import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1799.robot.commands.CompressorToggle;
+import org.usfirst.frc.team1799.robot.commands.LgrabberClose;
+import org.usfirst.frc.team1799.robot.commands.LgrabberOff;
+import org.usfirst.frc.team1799.robot.commands.LgrabberOpen;
+import org.usfirst.frc.team1799.robot.commands.RgrabberClose;
+import org.usfirst.frc.team1799.robot.commands.RgrabberOff;
+import org.usfirst.frc.team1799.robot.commands.RgrabberOpen;
+import org.usfirst.frc.team1799.robot.commands.ShooterPullIn;
+import org.usfirst.frc.team1799.robot.commands.ShooterPunch;
+import org.usfirst.frc.team1799.robot.commands.ShooterPushOut;
+import org.usfirst.frc.team1799.robot.commands.grabberToggle;
+import org.usfirst.frc.team1799.robot.triggers.DoubleButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -26,6 +38,8 @@ import org.usfirst.frc.team1799.robot.commands.CompressorToggle;
  *
  */
 public class OI {
+	public static enum motor_location {frontLeft, frontRight, backLeft, backRight} 
+
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
@@ -60,6 +74,13 @@ public class OI {
 		// Put Some buttons on the SmartDashboard
 		SmartDashboard.putData("Drive Forward", new AutoDriveForward());
 		SmartDashboard.putData("Drive Platform", new AutoDriveBack());
+	
+		SmartDashboard.putNumber("FrontLeft Tune", new Double(1.0));
+		SmartDashboard.putNumber("FrontRight Tune", new Double(1.0));
+		SmartDashboard.putNumber("BackLeft Tune", new Double(1.0));
+		SmartDashboard.putNumber("BackRight Tune", new Double(1.0));
+
+		SmartDashboard.putNumber("Motor Ramping Factor", new Double(1.0));
 		
 
 //		// Create some buttons
@@ -68,13 +89,38 @@ public class OI {
 //		JoystickButton dpadDown = new JoystickButton(m_stick, 7);
 //		JoystickButton dpadLeft = new JoystickButton(m_stick, 8);
 
+		// shooter push out
+		JoystickButton dSpush = new JoystickButton(m_stick, 5);
+		dSpush.whenPressed(new ShooterPushOut());
+		// shooter pull in
+		JoystickButton dSpull = new JoystickButton(m_stick, 6);
+		dSpull.whenPressed(new ShooterPullIn());
 		// toggle compressor on/off - for testing and demo mostly
-		// TODO: try different button number
 		JoystickButton dcompressor = new JoystickButton(m_stick, 7);
 		dcompressor.whenPressed(new CompressorToggle());
+		// shooter punch for 300ms
+		JoystickButton dSpunch = new JoystickButton(m_stick, 8);
+		dSpunch.whenPressed(new ShooterPunch());
+		
+		// Right grabber open close and off
+		JoystickButton dRgrabberOpen = new JoystickButton(m_stick, 3);
+		JoystickButton dRgrabberClose = new JoystickButton(m_stick, 4);
+		new DoubleButton(m_stick, 3, 4).whenActive(new RgrabberOff());
+		dRgrabberOpen.whenPressed(new RgrabberOpen());
+		dRgrabberClose.whenPressed(new RgrabberClose());
 
-		//TODO: un-comment  below line and see if you this in SmartDashboard.
-		//SmartDashboard.putData("Compressor Toggle", new CompressorToggle());
+		// Left grabber open close and off
+		JoystickButton dLgrabberOpen = new JoystickButton(m_stick, 1);
+		JoystickButton dLgrabberClose = new JoystickButton(m_stick, 2);
+		new DoubleButton(m_stick, 1, 2).whenActive(new LgrabberOff());
+		dLgrabberOpen.whenPressed(new LgrabberOpen());
+		dLgrabberClose.whenPressed(new LgrabberClose());
+		// Toggle grabber
+		new DoubleButton(m_stick, 1, 3).whenActive(new grabberToggle());
+		new DoubleButton(m_stick, 2, 4).whenActive(new grabberToggle());
+		
+		
+
 //
 //		// Connect the buttons to commands
 //		dpadUp.whenPressed(new AutoDriveForward());
@@ -84,4 +130,30 @@ public class OI {
 	public Joystick getJoystick() {
 		return m_stick;
 	}
+
+	public double getMotorSpeedTuneFactor(motor_location postion) {
+		double tuneFactor = 1.0;
+		
+		switch(postion) {
+			case frontLeft:
+				tuneFactor = SmartDashboard.getNumber("FrontLeft Tune", new Double(1.0));
+				break;
+			case frontRight:
+				tuneFactor = SmartDashboard.getNumber("FrontRight Tune", new Double(1.0));
+				break;
+			case backLeft:
+				tuneFactor = SmartDashboard.getNumber("BackLeft Tune", new Double(1.0));
+				break;
+			case backRight:
+				tuneFactor = SmartDashboard.getNumber("BackRight Tune", new Double(1.0));
+				break;
+		}
+	
+		return tuneFactor;
+	}
+	
+	public double getMotorSpeedRampFactor(motor_location postion) {
+		return SmartDashboard.getNumber("Motor Ramping Factor", new Double(1.0));
+	}
+
 }

@@ -2,17 +2,18 @@ package org.usfirst.frc.team1799.robot.commands;
 
 import org.usfirst.frc.team1799.robot.Robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class CompressorToggle extends Command {
+public class grabberToggle extends Command {
 
-    public CompressorToggle() {
+    public grabberToggle() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(Robot.kcompressor);
+        requires(Robot.kGrabberSystem);
     }
 
     // Called just before this Command runs the first time
@@ -22,15 +23,29 @@ public class CompressorToggle extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-		Robot.kcompressor.toggleRun();
-//		System.out.println(this.getClass().getName() + " execute");
+    	if (DoubleSolenoid.Value.kOff == Robot.kGrabberSystem.Rget())
+    	{
+    		Robot.kGrabberSystem.Rclose();
+    	}else
+    	{
+    		Robot.kGrabberSystem.Roff();
+    	}
+    	
+    	if (DoubleSolenoid.Value.kOff == Robot.kGrabberSystem.Lget())
+    	{
+    		Robot.kGrabberSystem.Lclose();
+    	}else
+    	{
+    		Robot.kGrabberSystem.Loff();
+    	}
+
+		System.out.println(this.getClass().getName() + " execute");
+    	
     }
-    
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return true;
-        // TODO: try False
     }
 
     // Called once after isFinished returns true

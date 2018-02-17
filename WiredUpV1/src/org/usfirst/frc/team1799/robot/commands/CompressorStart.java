@@ -26,8 +26,7 @@ public class CompressorStart extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
-     // TODO: try False
+        return true; //with false : can't be used in periodic
     }
 
     // Called once after isFinished returns true

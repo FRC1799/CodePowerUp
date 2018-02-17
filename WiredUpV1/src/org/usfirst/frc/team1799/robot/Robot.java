@@ -16,7 +16,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1799.robot.commands.AutoDriveForward;
 import org.usfirst.frc.team1799.robot.commands.AutoDriveTurnLeft;
 import org.usfirst.frc.team1799.robot.subsystems.MecanumDriveTrain;
+import org.usfirst.frc.team1799.robot.subsystems.ShooterSystem;
 import org.usfirst.frc.team1799.robot.subsystems.CompressorSubsystem;
+import org.usfirst.frc.team1799.robot.subsystems.GrabberSystem;
 import org.usfirst.frc.team1799.robot.Robot;
 
 /**
@@ -34,8 +36,9 @@ public class Robot extends TimedRobot {
 
 	// Initialize the our WireUpV1 subsystems
 	public static final MecanumDriveTrain kDrivetrain = new MecanumDriveTrain();
-
 	public static final CompressorSubsystem kcompressor = new CompressorSubsystem();
+	public static final ShooterSystem kShooterSystem = new ShooterSystem();
+	public static final GrabberSystem kGrabberSystem = new GrabberSystem();
 	
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -50,12 +53,16 @@ public class Robot extends TimedRobot {
 		m_chooser.addDefault("Default Turn Left in Circle ", new AutoDriveTurnLeft());
 		m_chooser.addObject("Auto Drive Forward ", new AutoDriveForward());
 		
+		// start the compressor
+		kcompressor.start();
+		
+		
 		SmartDashboard.putData("Auto mode", m_chooser);
 		// SmartDashboard Buttons for robot subsystems initialized above
 		SmartDashboard.putData("Mecanum DriveTrain", kDrivetrain);
-
-		// start the compressor
-		kcompressor.start();
+		SmartDashboard.putData("Compressor Subsystem", kcompressor);
+		SmartDashboard.putData("Shooter System", kShooterSystem);
+		SmartDashboard.putData("Grabber System", kGrabberSystem);
 	}
 
 	/**
@@ -135,6 +142,12 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+		SmartDashboard.putData(Scheduler.getInstance());
+		kcompressor.sendInfo();
+		kShooterSystem.sendInfo();
+		kDrivetrain.sendInfo();
+		kGrabberSystem.sendInfo();
+		Scheduler.getInstance().run();
 		log();
 	}
 	
