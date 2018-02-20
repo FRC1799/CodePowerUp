@@ -7,6 +7,8 @@
 
 package org.usfirst.frc.team1799.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -66,6 +68,11 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Shooter System", kShooterSystem);
 		SmartDashboard.putData("Grabber System", kGrabberSystem);
 		SmartDashboard.putData("Arm PWM System", kArm);
+		
+		new Thread(() -> {
+			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+			camera.setResolution(640, 480);
+		}).start();
 	}
 
 	/**

@@ -25,7 +25,7 @@ public class RobotMap {
 	// public static int rangefinderModule = 1;
 	public static final int kJoystickChannel = 0;
 	public static final int kGyroChannel = 0;
-	public static final double kShooterPunchTime = 0.3; //seconds
+	public static final double kShooterPunchTime = 1.0; //seconds
 
 	//Arm system
 	public static final double kArmspeed = 0.9; // 0 to 1:max

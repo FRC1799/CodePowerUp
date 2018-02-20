@@ -78,12 +78,15 @@ public class OI {
 		SmartDashboard.putData("Drive Forward", new AutoDriveForward());
 		SmartDashboard.putData("Drive Platform", new AutoDriveBack());
 	
-		SmartDashboard.putNumber("FrontLeft Tune", new Double(1.0));
-		SmartDashboard.putNumber("FrontRight Tune", new Double(1.0));
-		SmartDashboard.putNumber("BackLeft Tune", new Double(1.0));
-		SmartDashboard.putNumber("BackRight Tune", new Double(1.0));
+		SmartDashboard.putNumber("FrontLeft Tune", new Double(0.85));
+		SmartDashboard.putNumber("FrontRight Tune", new Double(0.92));
+		SmartDashboard.putNumber("BackLeft Tune", new Double(0.95));
+		SmartDashboard.putNumber("BackRight Tune", new Double(0.97));
 
 		SmartDashboard.putNumber("Motor Ramping Factor", new Double(1.0));
+		
+		SmartDashboard.putBoolean("Invert Left Lift Motor", false);
+		SmartDashboard.putBoolean("Invert Right Lift Motor", false);
 		
 
 //		// Create some buttons
@@ -109,15 +112,15 @@ public class OI {
 		JoystickButton dRgrabberOpen = new JoystickButton(m_stick, 3);
 		JoystickButton dRgrabberClose = new JoystickButton(m_stick, 4);
 		new DoubleButton(m_stick, 3, 4).whenActive(new RgrabberOff());
-		dRgrabberOpen.whenPressed(new RgrabberOpen());
-		dRgrabberClose.whenPressed(new RgrabberClose());
+		dRgrabberOpen.whileHeld(new RgrabberOpen());
+		dRgrabberClose.whileHeld(new RgrabberClose());
 
 		// Left grabber open close and off
 		JoystickButton dLgrabberOpen = new JoystickButton(m_stick, 1);
 		JoystickButton dLgrabberClose = new JoystickButton(m_stick, 2);
 		new DoubleButton(m_stick, 1, 2).whenActive(new LgrabberOff());
-		dLgrabberOpen.whenPressed(new LgrabberOpen());
-		dLgrabberClose.whenPressed(new LgrabberClose());
+		dLgrabberOpen.whileHeld(new LgrabberOpen());
+		dLgrabberClose.whileHeld(new LgrabberClose());
 		// Toggle grabber
 		new DoubleButton(m_stick, 1, 3).whenActive(new grabberToggle());
 		new DoubleButton(m_stick, 2, 4).whenActive(new grabberToggle());
@@ -153,15 +156,24 @@ public class OI {
 				tuneFactor = SmartDashboard.getNumber("BackLeft Tune", new Double(1.0));
 				break;
 			case backRight:
-				tuneFactor = SmartDashboard.getNumber("BackRight Tune", new Double(1.0));
+ 				tuneFactor = SmartDashboard.getNumber("BackRight Tune", new Double(1.0));
 				break;
 		}
 	
 		return tuneFactor;
 	}
 	
-	public double getMotorSpeedRampFactor(motor_location postion) {
+	public double getMotorAccelerationRampFactor() {
 		return SmartDashboard.getNumber("Motor Ramping Factor", new Double(1.0));
 	}
 
+	public boolean getInvertLeftLiftMotor() {
+		boolean bInvert = SmartDashboard.getBoolean("Invert Left Lift Motor", false);
+		return bInvert;
+	}
+
+	public boolean getInvertRightLiftMotor() {
+		boolean bInvert = SmartDashboard.getBoolean("Invert Right Lift Motor", false);
+		return bInvert;
+	}
 }
