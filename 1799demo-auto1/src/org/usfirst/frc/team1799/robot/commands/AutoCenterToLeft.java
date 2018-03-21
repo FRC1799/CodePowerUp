@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutonomousModeDriveAndScale extends CommandGroup {
+public class AutoCenterToLeft extends CommandGroup {
 
-    public AutonomousModeDriveAndScale() {
+    public AutoCenterToLeft() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

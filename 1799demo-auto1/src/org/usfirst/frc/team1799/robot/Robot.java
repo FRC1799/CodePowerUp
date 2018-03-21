@@ -9,16 +9,19 @@ package org.usfirst.frc.team1799.robot;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team1799.robot.commands.AutoDriveForward;
-import org.usfirst.frc.team1799.robot.commands.AutoDriveTurnLeft;
+import org.usfirst.frc.team1799.robot.commands.AutoCenterToLeft;
+import org.usfirst.frc.team1799.robot.commands.AutoCenterToRight;
+import org.usfirst.frc.team1799.robot.commands.AutoStraight;
 import org.usfirst.frc.team1799.robot.subsystems.MecanumDriveTrain;
 import org.usfirst.frc.team1799.robot.subsystems.ShooterSystem;
+
 import org.usfirst.frc.team1799.robot.subsystems.ArmPWMsystem;
 import org.usfirst.frc.team1799.robot.subsystems.CompressorSubsystem;
 import org.usfirst.frc.team1799.robot.subsystems.GrabberSystem;
@@ -44,8 +47,10 @@ public class Robot extends TimedRobot {
 	public static final GrabberSystem kGrabberSystem = new GrabberSystem();
 	public static final ArmPWMsystem kArm = new ArmPWMsystem();
 	
-	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	public Command m_autonomousCommand;
+	SendableChooser<String> m_chooser = new SendableChooser<>();
+    public static String startingPosition;
+    public static boolean switchOnLeft, scaleOnLeft;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -54,8 +59,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-		m_chooser.addDefault("Default Turn Left in Circle ", new AutoDriveTurnLeft());
-		m_chooser.addObject("Auto Drive Forward ", new AutoDriveForward());
 		
 		// start the compressor
 		kcompressor.start();
@@ -69,10 +72,16 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Grabber System", kGrabberSystem);
 		SmartDashboard.putData("Arm PWM System", kArm);
 		
+		m_chooser.addDefault("Center", "center");
+		m_chooser.addObject("Left", "left");
+		m_chooser.addObject("Right", "right");
+		
 		new Thread(() -> {
 			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 			camera.setResolution(640, 480);
 		}).start();
+		
+		
 	}
 
 	/**
@@ -103,15 +112,48 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = m_chooser.getSelected();
+//		m_autonomousCommand = m_chooser.getSelected();
 
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
+//		Scheduler.getInstance().add(new ResetArmEncoder());
+//		Scheduler.getInstance().add(new ResetWristEncoder());
 
+		String msg = DriverStation.getInstance().getGameSpecificMessage();
+		while (msg == null || msg.length() < 2) {
+		    msg = DriverStation.getInstance().getGameSpecificMessage();
+		}
+
+		switchOnLeft = msg.substring(0, 1).equals("L");
+		scaleOnLeft = msg.substring(1, 2).equals("L");
+		startingPosition = m_chooser.getSelected();
+
+		if (switchOnLeft) {
+		    SmartDashboard.putString("Switch Position", "Left");
+		} else {
+		    SmartDashboard.putString("Switch Position", "Right");
+		}
+
+		if (scaleOnLeft) {
+		    SmartDashboard.putString("Scale Position", "Left");
+		} else {
+		    SmartDashboard.putString("Scale Position", "Right");
+		}
+
+		if (startingPosition == "center" && switchOnLeft) {
+		    m_autonomousCommand = new AutoCenterToLeft();
+		} else if (startingPosition == "center" && !switchOnLeft) {
+		    m_autonomousCommand = new AutoCenterToRight();
+		} else if (startingPosition == "left" && scaleOnLeft) {
+		    m_autonomousCommand = new AutoStraight();
+		} else if (startingPosition == "left" && !scaleOnLeft) {
+		    m_autonomousCommand = new AutoStraight();
+		} else if (startingPosition == "right" && scaleOnLeft) {
+		    m_autonomousCommand = new AutoStraight();
+		} else if (startingPosition == "right" && !scaleOnLeft) {
+		    m_autonomousCommand = new AutoStraight();
+		} else {
+		    m_autonomousCommand = null;
+		}
+		
 		// schedule the autonomous command (example)
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
