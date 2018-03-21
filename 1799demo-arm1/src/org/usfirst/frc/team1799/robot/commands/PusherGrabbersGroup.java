@@ -18,8 +18,8 @@ public class PusherGrabbersGroup extends CommandGroup {
         // e.g. addParallel(new Command1());
         //      addSequential(new Command2());
         // Command1 and Command2 will run in parallel.
-    	addSequential(new RgrabberOpen());
-    	addSequential(new LgrabberOpen());
+    	addParallel(new RgrabberOpen());
+    	addParallel(new LgrabberOpen());
     	addSequential(new ShooterPunch());
 
         // A command group will require all of the subsystems that each member

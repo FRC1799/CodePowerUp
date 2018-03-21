@@ -13,8 +13,9 @@ import org.usfirst.frc.team1799.robot.commands.ArmMoveUp;
 import org.usfirst.frc.team1799.robot.commands.ArmStop;
 import org.usfirst.frc.team1799.robot.commands.AutoDriveBack;
 import org.usfirst.frc.team1799.robot.RobotMap;
-import edu.wpi.first.wpilibj.Joystick;
+import org.usfirst.frc.team1799.robot.OI.motor_location;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 //import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
