@@ -142,13 +142,13 @@ public class Robot extends TimedRobot {
 		    m_autonomousCommand = new AutoCenterToLeft();
 		} else if (startingPosition == "center" && !switchOnLeft) {
 		    m_autonomousCommand = new AutoCenterToRight();
-		} else if (startingPosition == "left" && scaleOnLeft) {
+		} else if (startingPosition == "left" && switchOnLeft) {
 		    m_autonomousCommand = new AutoStraight();
-		} else if (startingPosition == "left" && !scaleOnLeft) {
+		} else if (startingPosition == "left" && !switchOnLeft) {
 		    m_autonomousCommand = new AutoStraight();
-		} else if (startingPosition == "right" && scaleOnLeft) {
+		} else if (startingPosition == "right" && switchOnLeft) {
 		    m_autonomousCommand = new AutoStraight();
-		} else if (startingPosition == "right" && !scaleOnLeft) {
+		} else if (startingPosition == "right" && !switchOnLeft) {
 		    m_autonomousCommand = new AutoStraight();
 		} else {
 		    m_autonomousCommand = null;

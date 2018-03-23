@@ -24,10 +24,8 @@ public class AutoStraight extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	int x = 0; 
-    	while(x < 10) { 
-    		addSequential(new AutoDriveForward());
-    	x++; 
-    	}
+
+	///////////////////////////////////////
+        addSequential(new AutoDriveForward(),8);
     }
 }

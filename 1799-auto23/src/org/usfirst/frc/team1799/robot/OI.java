@@ -7,32 +7,24 @@
 
 package org.usfirst.frc.team1799.robot;
 
-import org.usfirst.frc.team1799.robot.commands.AutoDriveForward;
 import org.usfirst.frc.team1799.robot.commands.ArmMoveDown;
 import org.usfirst.frc.team1799.robot.commands.ArmMoveUp;
 import org.usfirst.frc.team1799.robot.commands.ArmStop;
-import org.usfirst.frc.team1799.robot.commands.AutoDriveBack;
-import org.usfirst.frc.team1799.robot.RobotMap;
-import edu.wpi.first.wpilibj.Joystick;
-
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-//import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team1799.robot.commands.AutoDriveForward;
 import org.usfirst.frc.team1799.robot.commands.CompressorToggle;
 import org.usfirst.frc.team1799.robot.commands.Grabber_OpenGroup;
 import org.usfirst.frc.team1799.robot.commands.Grabber_closeGroup;
 import org.usfirst.frc.team1799.robot.commands.LgrabberClose;
-import org.usfirst.frc.team1799.robot.commands.LgrabberOff;
 import org.usfirst.frc.team1799.robot.commands.LgrabberOpen;
 import org.usfirst.frc.team1799.robot.commands.PusherGrabbersGroup;
 import org.usfirst.frc.team1799.robot.commands.RgrabberClose;
-import org.usfirst.frc.team1799.robot.commands.RgrabberOff;
 import org.usfirst.frc.team1799.robot.commands.RgrabberOpen;
 import org.usfirst.frc.team1799.robot.commands.ShooterPullIn;
-import org.usfirst.frc.team1799.robot.commands.ShooterPunch;
-import org.usfirst.frc.team1799.robot.commands.ShooterPushOut;
-import org.usfirst.frc.team1799.robot.commands.grabberToggle;
-import org.usfirst.frc.team1799.robot.triggers.DoubleButton;
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+//import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -144,7 +136,6 @@ public class OI {
 	public OI() {
 		// Put Some buttons on the SmartDashboard
 		SmartDashboard.putData("Drive Forward", new AutoDriveForward());
-		SmartDashboard.putData("Drive Platform", new AutoDriveBack());
 		SmartDashboard.putNumber("FrontLeft Tune", new Double(0.85));
 		SmartDashboard.putNumber("FrontRight Tune", new Double(0.92));
 		SmartDashboard.putNumber("BackLeft Tune", new Double(0.95));

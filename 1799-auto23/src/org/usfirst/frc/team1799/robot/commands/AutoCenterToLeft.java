@@ -1,13 +1,14 @@
 package org.usfirst.frc.team1799.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class AutoCenterToRight extends CommandGroup {
+public class AutoCenterToLeft extends CommandGroup {
 
-    public AutoCenterToRight() {
+    public AutoCenterToLeft() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -24,5 +25,11 @@ public class AutoCenterToRight extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    	
+    	
+    	/////////////////////////////////////////////////
+            addSequential(new AutoDriveSLeft(),4);
+		///////////////////////////////////////
+            addSequential(new AutoDriveForward(),4);
     }
 }

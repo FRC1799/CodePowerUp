@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoCenterToLeft extends CommandGroup {
+public class AutoCenterToRight extends CommandGroup {
 
-    public AutoCenterToLeft() {
+    public AutoCenterToRight() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -24,5 +24,10 @@ public class AutoCenterToLeft extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    	
+    	/////////////////////////////////////////////////
+        addSequential(new AutoDriveSRight(),4);
+	///////////////////////////////////////
+        addSequential(new AutoDriveForward(),4);
     }
 }

@@ -7,22 +7,22 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AutoDriveForward extends Command {
+public class AutoDriveSLeft extends Command {
 
-    public AutoDriveForward() {
+    public AutoDriveSLeft() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    }
-
-    // Called just before this Command runs the first time
-    protected void initialize() {
 
 		requires(Robot.kDrivetrain);
     }
 
+    // Called just before this Command runs the first time
+    protected void initialize() {
+    }
+
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-		Robot.kDrivetrain.macDrive(0,0.8,0);
+		Robot.kDrivetrain.macDrive(-0.5,-0.3,0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -32,6 +32,7 @@ public class AutoDriveForward extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+		Robot.kDrivetrain.macDrive(0,0,0);
 		System.out.println(this.getClass().getName() + " end");
     }
 
