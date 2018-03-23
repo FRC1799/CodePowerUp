@@ -66,11 +66,11 @@ public class Robot extends TimedRobot {
 		
 		SmartDashboard.putData("Auto mode", m_chooser);
 		// SmartDashboard Buttons for robot subsystems initialized above
-		SmartDashboard.putData("Mecanum DriveTrain", kDrivetrain);
-		SmartDashboard.putData("Compressor Subsystem", kcompressor);
-		SmartDashboard.putData("Shooter System", kShooterSystem);
-		SmartDashboard.putData("Grabber System", kGrabberSystem);
-		SmartDashboard.putData("Arm PWM System", kArm);
+//		SmartDashboard.putData("Mecanum DriveTrain", kDrivetrain);
+//		SmartDashboard.putData("Compressor Subsystem", kcompressor);
+//		SmartDashboard.putData("Shooter System", kShooterSystem);
+//		SmartDashboard.putData("Grabber System", kGrabberSystem);
+//		SmartDashboard.putData("Arm PWM System", kArm);
 		
 		m_chooser.addDefault("Center", "center");
 		m_chooser.addObject("Left", "left");
@@ -201,11 +201,11 @@ public class Robot extends TimedRobot {
 	@Override
 	  public void robotPeriodic() {
 		SmartDashboard.putData(Scheduler.getInstance());
-		kcompressor.sendInfo();
-		kShooterSystem.sendInfo();
-		kDrivetrain.sendInfo();
-		kGrabberSystem.sendInfo();
-		kArm.sendInfo();
+//		kcompressor.sendInfo();
+//		kShooterSystem.sendInfo();
+//		kDrivetrain.sendInfo();
+//		kGrabberSystem.sendInfo();
+//		kArm.sendInfo();
 		Scheduler.getInstance().run();
 		log();
 	  }
